@@ -5,9 +5,14 @@ repos:
   - repo: https://github.com/djlint/djLint
     rev: v1.36.4
     hooks:
-      - id: djlint-reformat-jinja
-        files: "\\.(html|jinja)$"
-        types_or: ["html", "jinja"]
+      - id: djlint-reformat
+        files: "\\.(html|jinja|j2)$"
+      - id: djlint
+        files: "\\.(html|jinja|j2)$"
+  - repo: https://github.com/standard/standard
+    rev: v17.1.2
+    hooks:
+      - id: standard
   - repo: https://github.com/google/yamlfmt
     rev: v0.14.0
     hooks:
