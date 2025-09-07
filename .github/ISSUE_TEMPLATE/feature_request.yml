@@ -1,0 +1,114 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for Insight Ingenious
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please describe your idea clearly so we can understand and evaluate it.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief, clear summary of the feature you'd like to see
+      placeholder: What feature would you like to see added?
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Use Case
+      description: What problem does this feature solve? What use case does it address?
+      placeholder: |
+        Describe the problem you're trying to solve or the use case this feature would address.
+        For example: "When working with multi-agent workflows, I need to..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like to see
+      placeholder: |
+        Describe how you envision this feature working.
+        Include any specific implementation ideas, API changes, or user interface considerations.
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Area
+      description: Which area of the system would this feature affect?
+      options:
+        - Multi-Agent Framework
+        - Configuration System
+        - API Endpoints
+        - Chainlit Web UI
+        - Azure Services Integration
+        - Database/Storage
+        - CLI Tools
+        - Extensions/Templates
+        - Documentation
+        - Conversation Workflows
+        - Prompt Templates
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve my workflow
+        - High - Important for my use case
+        - Critical - Blocking my adoption/usage
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative solutions or workarounds?
+      placeholder: |
+        Describe any alternative solutions you've considered or current workarounds you're using.
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or Mock-ups
+      description: Provide examples, code snippets, or mock-ups if helpful
+      placeholder: |
+        ```python
+        # Example code or configuration
+        ```
+
+        Or describe API endpoints, UI mockups, etc.
+  - type: checkboxes
+    id: feature_type
+    attributes:
+      label: Feature Type
+      description: What type of feature is this? (Select all that apply)
+      options:
+        - label: New conversation workflow/pattern
+        - label: New agent type or capability
+        - label: API enhancement
+        - label: Configuration improvement
+        - label: UI/UX enhancement
+        - label: Performance improvement
+        - label: Integration with new service
+        - label: Developer experience improvement
+        - label: Documentation enhancement
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I have clearly described the problem this feature would solve
+          required: true
+        - label: I understand this is a suggestion and may not be implemented immediately
+          required: true

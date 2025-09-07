@@ -1,0 +1,157 @@
+name: 🔧 Extension & Custom Agent Help
+description: Get help with building custom agents, extensions, or conversation patterns
+title: "[Extension]: "
+labels: ["extension", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help building custom agents, extensions, or conversation patterns? Please provide details about what you're trying to achieve.
+  - type: dropdown
+    id: extension_type
+    attributes:
+      label: What are you building?
+      description: What type of custom component are you working on?
+      options:
+        - Custom Agent
+        - Custom Conversation Pattern
+        - Custom Conversation Flow
+        - Custom API Route
+        - Custom Template/Prompt
+        - Extension using ingenious_extensions_template
+        - Integration with external service
+        - Other custom component
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal/Objective
+      description: What are you trying to achieve with your custom component?
+      placeholder: |
+        Describe what you want your custom agent/extension to do.
+        For example:
+        - "Create an agent that analyzes financial data"
+        - "Build a workflow that integrates with Slack"
+        - "Create a conversation pattern for customer support"
+    validations:
+      required: true
+  - type: textarea
+    id: current_progress
+    attributes:
+      label: Current Progress
+      description: What have you implemented so far?
+      placeholder: |
+        Describe what you've already built and what's working:
+        - Code you've written
+        - Templates you've created
+        - Configuration you've set up
+        - Tests you've run
+  - type: textarea
+    id: specific_issue
+    attributes:
+      label: Specific Issue/Question
+      description: What specific problem are you facing or question do you have?
+      placeholder: |
+        Be specific about what's not working or what you're unsure about:
+        - Error messages you're getting
+        - Behavior that's not what you expected
+        - Concepts you need clarification on
+        - Best practices you're unsure about
+    validations:
+      required: true
+  - type: textarea
+    id: code_samples
+    attributes:
+      label: Code/Configuration Samples
+      description: Share relevant code or configuration you're working with
+      placeholder: |
+        ```python
+        # Your agent code
+        class MyCustomAgent:
+            # ... your implementation
+        ```
+
+        ```yaml
+        # Your configuration
+        conversation_flows:
+          my_custom_flow:
+            # ... your flow config
+        ```
+  - type: dropdown
+    id: framework_area
+    attributes:
+      label: Framework Area
+      description: Which part of the Insight Ingenious framework are you working with?
+      options:
+        - Multi-Agent Framework (ingenious/services/chat_services/multi_agent/)
+        - Conversation Patterns
+        - Conversation Flows
+        - Agent Templates (ingenious/templates/)
+        - API Routes (ingenious/api/)
+        - Configuration System
+        - Database Integration
+        - Azure Services Integration
+        - Chainlit Web UI
+        - Extensions Template (ingenious_extensions_template/)
+        - Not sure
+  - type: textarea
+    id: documentation_checked
+    attributes:
+      label: Documentation References
+      description: Which documentation have you already consulted?
+      placeholder: |
+        List the documentation you've already read:
+        - [ ] docs/extensions/README.md
+        - [ ] docs/development/README.md
+        - [ ] CONTRIBUTING.md
+        - [ ] Code examples in ingenious_extensions_template/
+        - [ ] Other: ____________
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Your development environment
+      placeholder: |
+        - OS: [e.g., Windows 10, macOS 13, Ubuntu 22.04]
+        - Python version: [e.g., 3.13.1]
+        - Insight Ingenious version: [e.g., 0.1.0]
+        - Development setup: [local, Azure, other]
+  - type: dropdown
+    id: experience_level
+    attributes:
+      label: Experience Level
+      description: How familiar are you with Insight Ingenious?
+      options:
+        - New to Insight Ingenious
+        - Used basic workflows, new to extensions
+        - Some experience with extensions
+        - Experienced user
+  - type: checkboxes
+    id: help_type
+    attributes:
+      label: Type of Help Needed
+      description: What kind of help are you looking for? (Select all that apply)
+      options:
+        - label: Conceptual explanation/guidance
+        - label: Code review/feedback
+        - label: Debugging assistance
+        - label: Best practices advice
+        - label: Example code/templates
+        - label: Architecture guidance
+        - label: Performance optimization
+        - label: Testing strategies
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have read the extension documentation
+          required: true
+        - label: I have tried using the ingenious_extensions_template as a starting point
+          required: false
+        - label: I have searched existing issues for similar questions
+          required: true
+        - label: I have provided specific details about my use case
+          required: true

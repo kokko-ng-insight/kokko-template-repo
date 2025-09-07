@@ -1,0 +1,133 @@
+name: ⚙️ Configuration Help
+description: Get help with configuration, setup, or deployment issues
+title: "[Config]: "
+labels: ["help wanted", "configuration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help with configuration? Please provide as much detail as possible about your setup and the issue you're facing.
+  - type: textarea
+    id: issue
+    attributes:
+      label: Configuration Issue
+      description: Describe the configuration problem you're experiencing
+      placeholder: "What configuration issue are you facing? \nFor example: \"I can't get Azure OpenAI to work\", \"SQL workflow returns errors\", etc.\n"
+    validations:
+      required: true
+  - type: dropdown
+    id: setup_stage
+    attributes:
+      label: Setup Stage
+      description: At what stage are you experiencing issues?
+      options:
+        - Initial project setup
+        - API configuration
+        - Azure services setup
+        - Database configuration
+        - Workflow configuration
+        - Deployment
+        - Runtime/operational issues
+    validations:
+      required: true
+  - type: dropdown
+    id: workflow_target
+    attributes:
+      label: Target Workflow
+      description: Which workflow are you trying to configure?
+      options:
+        - classification_agent (minimal config)
+        - knowledge_base_agent (requires Azure Search)
+        - sql_manipulation_agent (requires database)
+        - bike_insights (minimal config)
+        - document-processing (requires Azure Document Intelligence)
+        - Custom workflow
+        - All workflows
+        - Not sure/General setup
+    validations:
+      required: true
+  - type: textarea
+    id: steps_taken
+    attributes:
+      label: Steps Already Taken
+      description: What have you tried so far?
+      placeholder: |
+        List the steps you've already taken to resolve this issue:
+        1. Ran `uv run ingen initialize-new-project`
+        2. Updated config.yml with...
+        3. etc.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Information
+      description: Your environment details
+      placeholder: |
+        - OS: [e.g., Windows 10, macOS 13, Ubuntu 22.04]
+        - Python version: [e.g., 3.13.1]
+        - uv version: [run `uv --version`]
+        - Insight Ingenious version: [e.g., 0.1.0]
+        - Deployment target: [local, Azure, other cloud]
+    validations:
+      required: true
+  - type: textarea
+    id: config_structure
+    attributes:
+      label: Current Configuration
+      description: Share your current configuration structure (REMOVE ALL SENSITIVE DATA)
+      placeholder: |
+        config.yml (relevant sections):
+        ```yaml
+        profile: dev
+        models:
+          - model: "your-model-name"
+            api_type: azure
+        # ... other relevant config
+        ```
+
+        profiles.yml structure (NO SENSITIVE DATA):
+        ```yaml
+        - name: "dev"
+          models:
+            - model: "your-model-name"
+              # API key removed
+              base_url: "https://your-endpoint.openai.azure.com/..."
+        # ... other structure info
+        ```
+  - type: textarea
+    id: error_output
+    attributes:
+      label: Error Messages/Output
+      description: Any error messages or unexpected output you're seeing
+      placeholder: |
+        ```
+        Paste error messages or logs here
+        ```
+  - type: textarea
+    id: azure_services
+    attributes:
+      label: Azure Services Configuration
+      description: Which Azure services are you trying to use? (if applicable)
+      placeholder: |
+        - [ ] Azure OpenAI
+        - [ ] Azure Search/Cognitive Search
+        - [ ] Azure SQL Database
+        - [ ] Azure Cosmos DB
+        - [ ] Azure Document Intelligence
+        - [ ] Azure Storage/Blob
+        - [ ] Other: ___________
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm you've done the following
+      options:
+        - label: I have read the documentation in the docs/ folder
+          required: true
+        - label: I have removed all sensitive information (API keys, credentials, etc.)
+          required: true
+        - label: I have run `uv run ingen workflow-requirements` to check requirements
+          required: false
+        - label: I have checked the Getting Started guide
+          required: true

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/Insight-Services-APAC/ingenious/tree/main/docs
+    about: Check our comprehensive documentation for guides and examples
+  - name: 💬 Discussions
+    url: https://github.com/Insight-Services-APAC/ingenious/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 🚀 Getting Started
+    url: https://github.com/Insight-Services-APAC/ingenious/blob/main/docs/getting-started/README.md
+    about: New to Insight Ingenious? Start here for setup and quickstart guide
