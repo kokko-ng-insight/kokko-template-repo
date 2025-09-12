@@ -53,7 +53,24 @@
       "Bash(git checkout:*)",
       "WebFetch(domain:brandfetch.com)",
       "Bash(gh pr list:*)",
-      "Bash(gh pr view:*)"
+      "Bash(gh pr view:*)",
+      "WebFetch(domain:docs.astral.sh)",
+      "Bash(tree:*)",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_press_key",
+      "Bash(cat:*)",
+      "Bash(az storage account list:*)",
+      "Bash(az storage container list:*)",
+      "Bash(az storage account keys list:*)",
+      "mcp__playwright__browser_wait_for",
+      "Bash(gh api:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(awk:*)",
+      "Bash(cut:*)",
+      "Bash(sort:*)",
+      "Bash(uv search:*)"
     ],
     "deny": []
   }

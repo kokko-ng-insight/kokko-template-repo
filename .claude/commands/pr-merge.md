@@ -1,6 +1,6 @@
 # Pull Request Merge Workflow
 
-You are an expert GitHub repository manager and Python developer. Your task is to help the user manage pull requests by listing them, allowing selection for merging, and then handling all merge conflicts and quality checks using a two-stage merge process: first to `to-stable` branch, then to `main`.
+You are an expert GitHub repository manager and Python developer. Your task is to help the user manage pull requests by listing them, allowing selection for merging, and then handling all merge conflicts and quality checks using a two-stage merge process: first to `to-stable-2` branch, then to `main`.
 
 ## Workflow Steps
 
@@ -9,15 +9,15 @@ You are an expert GitHub repository manager and Python developer. Your task is t
 2. **User Selection**: Present the pull requests in a clear format and ask the user to select which pull request(s) they want to merge. Allow multiple selections.
 
 3. **Merge Process**: For each selected pull request:
-   - Check if the PR can be merged cleanly into `to-stable` branch
-   - Attempt to merge the pull request into `to-stable`
+   - Check if the PR can be merged cleanly into `to-stable-2` branch
+   - Attempt to merge the pull request into `to-stable-2`
    - If merge conflicts occur, identify and resolve them intelligently by:
      - Analyzing the conflicting code
      - Understanding the intent of both changes
      - Creating a resolution that preserves functionality from both branches
      - Testing the resolution makes sense in context
 
-4. **Quality Assurance Pipeline**: After merging to `to-stable`, run the complete quality pipeline:
+4. **Quality Assurance Pipeline**: After merging to `to-stable-2`, run the complete quality pipeline:
 
    a. **Test Suite**: Run `uv run pytest`
    - If tests fail, analyze the failures and fix them
@@ -36,22 +36,17 @@ You are an expert GitHub repository manager and Python developer. Your task is t
 
 5. **Final Verification**: Run all checks one final time to ensure everything passes
 
-6. **Merge to Main**: Once all quality checks pass on `to-stable`:
-   - Check if `to-stable` can be merged cleanly into `main`
-   - Merge `to-stable` branch into `main`
+6. **Merge to Main**: Once all quality checks pass on `to-stable-2`:
+   - Check if `to-stable-2` can be merged cleanly into `main`
+   - Merge `to-stable-2` branch into `main`
    - If conflicts occur during this merge, resolve them using the same intelligent approach
    - Run a final verification on `main` to ensure everything still works
 
 ## Guidelines
 
-- **Two-Stage Merge Process**: Always merge PRs to `to-stable` first, run all quality checks, then merge `to-stable` to `main`. This ensures stability in the main branch.
+- **Two-Stage Merge Process**: Always merge PRs to `to-stable-2` first, run all quality checks, then merge `to-stable-2` to `main`. This ensures stability in the main branch.
 
-- **Branch and Commit Preservation**:
-  - Do NOT squash commits when merging
-  - Do NOT delete PR branches after merge
-  - Preserve individual commit history for better traceability
-
-- **Merge Conflict Resolution**: When resolving conflicts (both to `to-stable` and `to-stable` to `main`), prioritize:
+- **Merge Conflict Resolution**: When resolving conflicts (both to `to-stable-2` and `to-stable-2` to `main`), prioritize:
   - Functionality preservation
   - Code consistency with the existing codebase
   - Following established patterns in the project

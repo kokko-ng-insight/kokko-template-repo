@@ -31,20 +31,15 @@
     git rebase main
     ```
 
-5. **If merge conflicts occur, resolve them atomically:**
+5. **If merge conflicts occur:**
     - Identify conflicted files: `git status`
-    - **For each conflicted file individually:**
-        1. Open the file and resolve conflicts manually
-        2. Look for conflict markers: `<<<<<<<`, `=======`, `>>>>>>>`
-        3. Edit the file to resolve conflicts, keeping the desired changes
-        4. Stage the resolved file: `git add <resolved-file>`
-        5. Create an atomic commit for this specific conflict resolution:
-           ```bash
-           git commit -m "resolve: merge conflict in <filename> - <brief_description>"
-           ```
-    - **After all conflicts are resolved individually:**
-        - For merge: Complete with `git merge --continue` (if needed)
-        - For rebase: Continue with `git rebase --continue`
+    - Open each conflicted file and resolve conflicts manually
+    - Look for conflict markers: `<<<<<<<`, `=======`, `>>>>>>>`
+    - Edit files to resolve conflicts, keeping the desired changes
+    - Stage resolved files: `git add <resolved-file>`
+    - Continue the merge/rebase:
+        - For merge: `git commit` (or `git merge --continue`)
+        - For rebase: `git rebase --continue`
 
 6. **Verify the merge/rebase was successful**
     ```sh
@@ -97,11 +92,9 @@ git checkout feature/my-feature
 # Merge main into feature branch
 git merge main
 
-# If conflicts occur, resolve them atomically:
-# For each conflicted file:
-git add specific-file.py
-git commit -m "resolve: merge conflict in specific-file.py - kept both feature and main changes"
-# Repeat for each file, then continue merge if needed
+# If conflicts occur, resolve them then:
+git add .
+git commit -m "Resolve merge conflicts with main"
 
 # Run tests
 uv run pytest
