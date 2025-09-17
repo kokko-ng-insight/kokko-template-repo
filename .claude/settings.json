@@ -1,7 +1,6 @@
 {
   "permissions": {
     "allow": [
-      // Azure CLI commands
       "Bash(az account show:*)",
       "Bash(az acr credential show:*)",
       "Bash(az acr list:*)",
@@ -24,8 +23,6 @@
       "Bash(az storage account keys list:*)",
       "Bash(az storage account list:*)",
       "Bash(az storage container list:*)",
-
-      // Basic system commands
       "Bash(awk:*)",
       "Bash(cat:*)",
       "Bash(cp:*)",
@@ -48,21 +45,15 @@
       "Bash(sort:*)",
       "Bash(touch:*)",
       "Bash(tree:*)",
-
-      // Package managers
       "Bash(brew install:*)",
       "Bash(npm init:*)",
       "Bash(npm install:*)",
-
-      // Container/virtualization
       "Bash(colima start:*)",
       "Bash(docker build:*)",
       "Bash(docker push:*)",
       "Bash(docker rm:*)",
       "Bash(docker run:*)",
       "Bash(docker stop:*)",
-
-      // Git commands
       "Bash(git add:*)",
       "Bash(git checkout:*)",
       "Bash(git commit:*)",
@@ -71,8 +62,6 @@
       "Bash(git pull:*)",
       "Bash(git push:*)",
       "Bash(git reset:*)",
-
-      // GitHub CLI
       "Bash(gh api:*)",
       "Bash(gh issue create:*)",
       "Bash(gh pr create:*)",
@@ -83,8 +72,6 @@
       "Bash(gh run view:*)",
       "Bash(gh secret set:*)",
       "Bash(gh workflow:*)",
-
-      // UV package manager
       "Bash(uv add:*)",
       "Bash(uv export:*)",
       "Bash(uv init:*)",
@@ -103,11 +90,7 @@
       "Bash(uv search:*)",
       "Bash(uv sync:*)",
       "Bash(uv tree:*)",
-
-      // MCP IDE
       "mcp__ide__getDiagnostics",
-
-      // MCP Playwright
       "mcp__playwright__browser_click",
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_console_messages",
@@ -125,8 +108,6 @@
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_type",
       "mcp__playwright__browser_wait_for",
-
-      // Web services
       "WebFetch(domain:blog.insight-services-apac.dev)",
       "WebFetch(domain:brandfetch.com)",
       "WebFetch(domain:docs.astral.sh)",
