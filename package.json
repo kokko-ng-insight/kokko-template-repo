@@ -1,0 +1,26 @@
+{
+  "name": "soca-v2-flask-app",
+  "version": "1.0.0",
+  "description": "SoCa Evaluation Platform - Frontend build tools",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css",
+    "build-css:watch": "tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css --watch",
+    "build-css:prod": "tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css --minify"
+  },
+  "keywords": [
+    "tailwindcss",
+    "flask",
+    "css"
+  ],
+  "author": "Insight Enterprises",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.9"
+  }
+}
