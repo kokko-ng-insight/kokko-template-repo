@@ -8,7 +8,7 @@ Run `uv run pre-commit install`. If this doesn't work, run `uv run python -m pre
 
 Add dev dependencies: `uv add vulture mypy --group dev` - this is needed for some of the pre-written prompts.
 
-**Notes** 
+**Notes**
 - I don't use Claude Code hooks on purpose. I don't want the agent's context flooded with lint fixes.
 - When the codebase is stable enough, I ask AI to create at least 40% code coverage in pytest with no long-running tests. This ensures stability when multiple people are working on the codebase.
 - My go-to stack right now is FAB (Flask, Alpine, Bootstrap) - concise libraries with a focus on Python. This is just a personal preference - feel free to modify the prompts to fit your stack.
