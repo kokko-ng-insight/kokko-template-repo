@@ -152,7 +152,6 @@ test-output/
 
 # AI
 CLAUDE.md
-.claude/
 
 # AI Testing
 test_dir/
