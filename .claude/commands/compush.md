@@ -7,12 +7,19 @@
     - Each commit should represent a cohesive set of related changes
     - Consider grouping by: feature, bug fix, refactoring, documentation, tests
 
-2. **Write a concise and descriptive git commit message**
+2. **Security check - Prevent secrets from being committed**
+    - Review all staged files for sensitive information before committing
+    - Look for: API keys, passwords, tokens, database credentials, private keys
+    - Check configuration files, environment files, and code comments
+    - Use `git diff --cached` to review what will be committed
+    - If secrets are found, remove them and use environment variables or secure vaults instead
+
+3. **Write a concise and descriptive git commit message**
     - Summarize the changes made.
     - Use the imperative mood (e.g., "Add feature", "Fix bug", "Update docs").
     - Keep the first line under 72 characters.
 
-3. **Commit your changes**
+4. **Commit your changes**
     - For small changes:
       ```sh
       git add .
@@ -25,7 +32,7 @@
       # Repeat for each logical group
       ```
 
-4. **Push your commits to the remote repository**
+5. **Push your commits to the remote repository**
     ```sh
     git push
     ```
