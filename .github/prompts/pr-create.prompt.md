@@ -3,9 +3,9 @@ mode: agent
 tools: ['runCommands', 'github']
 model: Claude Sonnet 4
 ---
-# Create Pull Request to to-stable-2 Branch
+# Create Pull Request to to-stable Branch
 
-Use GitHub CLI to create a pull request with the current branch targeting the `to-stable-2` branch.
+Use GitHub CLI to create a pull request with the current branch targeting the `to-stable` branch.
 
 ## Instructions
 
@@ -22,7 +22,7 @@ Use GitHub CLI to create a pull request with the current branch targeting the `t
 
 3. **Create pull request using GitHub CLI**
    ```bash
-   gh pr create --base to-stable-2 --title "<descriptive-title>" --body "<description>"
+   gh pr create --base to-stable --title "<descriptive-title>" --body "<description>"
    ```
 
 ## Example
@@ -31,8 +31,8 @@ Use GitHub CLI to create a pull request with the current branch targeting the `t
 # Push current feature branch
 git push origin feature/user-authentication
 
-# Create PR to to-stable-2
-gh pr create --base to-stable-2 --title "Add user authentication system" --body "Implements JWT-based authentication with login/logout endpoints and middleware for protected routes"
+# Create PR to to-stable
+gh pr create --base to-stable --title "Add user authentication system" --body "Implements JWT-based authentication with login/logout endpoints and middleware for protected routes"
 ```
 
 ## Tips
@@ -40,4 +40,4 @@ gh pr create --base to-stable-2 --title "Add user authentication system" --body 
 - Use descriptive titles that summarize the main change
 - Include relevant details in the PR description
 - Reference any related issues using `#issue-number`
-- Ensure the PR targets `to-stable-2` branch, not `main`
+- Ensure the PR targets `to-stable` branch, not `main`

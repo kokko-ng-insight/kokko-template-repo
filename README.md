@@ -20,7 +20,7 @@ Add dev dependencies: `uv add vulture mypy --group dev` - this is needed for som
 
 **Workflow for merging PRs:**
 1. Install Github MCP in Claude Code and Github Copilot
-2. Create branch to-stable-2
+2. Create branch to-stable
 3. Run /pr-merge - note that this will only be effective if you have good coverage using pytest (see earlier note about increasing pytest coverage for stability)
 
 **Misc Tips:**
