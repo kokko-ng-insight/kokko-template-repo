@@ -138,7 +138,6 @@ node_modules/
 *.swp
 *.swo
 *.orig
-*.local
 
 # Test Output
 test-output/
