@@ -1,8 +1,3 @@
----
-mode: agent
-tools: ['runCommands', 'problems', 'editFiles']
-model: Claude Sonnet 4
----
 # Find and Fix mypy Errors
 
 1. Run mypy to check for type errors in your codebase:

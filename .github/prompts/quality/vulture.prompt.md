@@ -1,11 +1,6 @@
----
-mode: agent
-tools: ['runCommands', 'problems', 'editFiles', 'codebase']
-model: Claude Sonnet 4
----
 # Find and Remove Dead Code with Vulture
 
-Use `uv run vulture . --exclude .venv`  to analyze this codebase for dead or unused code. For each item detected:
+Use `uv run vulture . --exclude .venv` to analyze this codebase for dead or unused code. For each item detected:
 
 1. **Thoroughly and intensively verify** whether the code is truly unused or unreachable. Cross-check:
    * All internal references across the codebase (including dynamically referenced or imported code)

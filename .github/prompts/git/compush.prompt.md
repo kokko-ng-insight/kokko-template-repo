@@ -1,7 +1,5 @@
 # Prompt: Generate, Commit, and Push with Git
 
-Commit and push all changes in this repo.
-
 ## Instructions
 
 1. **Security Check: Scan for secrets**

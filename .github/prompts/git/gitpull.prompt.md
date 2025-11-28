@@ -1,8 +1,3 @@
----
-mode: agent
-tools: ['runCommands', 'changes', 'codebase', 'editFiles']
-model: Claude Sonnet 4
----
 # Prompt: Pull Changes from Main Branch and Resolve Merge Conflicts
 
 ## Instructions

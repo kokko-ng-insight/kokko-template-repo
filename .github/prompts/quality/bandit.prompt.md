@@ -1,8 +1,3 @@
----
-mode: agent
-tools: ['runCommands', 'problems', 'editFiles', 'codebase']
-model: Claude Sonnet 4
----
 # Security Hardening Using Bandit
 
 Use Bandit to detect common Python security issues and refactor code safely.

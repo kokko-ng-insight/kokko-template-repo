@@ -1,8 +1,3 @@
----
-mode: agent
-tools: ['runCommands', 'problems', 'editFiles', 'codebase']
-model: Claude Sonnet 4
----
 # Refactor Using Radon (Complexity & Maintainability)
 
 Use Radon to identify high-complexity / low-maintainability hotspots and refactor them safely and incrementally.
@@ -49,7 +44,7 @@ git commit -m "refactor(radon): reduce complexity in <symbol> (C→B)"
 ```
 
 ## 5. Validate No Regression
-When a file is "done":
+When a file is “done”:
 ```bash
 uv run radon cc -s -a .
 uv run radon mi -s .
