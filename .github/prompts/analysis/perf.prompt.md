@@ -1,6 +1,8 @@
-Perform deep analysis to identify performance bottlenecks across the codebase:
+# Performance Bottleneck Analysis
 
-## 1. Database & Query Performance
+Perform deep analysis to identify performance bottlenecks across the codebase.
+
+## 1. Database and Query Performance
 
 **Search for:**
 - N+1 query patterns (loops containing database queries)
@@ -11,13 +13,9 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Synchronous database calls in loops
 - Missing connection pooling configuration
 
-**Check files:**
-- `backend/ingenious_extensions/services/`
-- `frontend/app/services/`
-- Any SQLAlchemy models and queries
-- Database migration files for index definitions
+**Check:** ORM models, database queries, migration files
 
-## 2. API & Network Performance
+## 2. API and Network Performance
 
 **Search for:**
 - Sequential API calls that could be parallelized
@@ -28,11 +26,7 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Repeated API calls for same data
 - No rate limiting or circuit breakers
 
-**Check files:**
-- `frontend/app/services/ingenious_client.py`
-- `backend/ingenious_extensions/api/routes/`
-- Azure Functions HTTP trigger handlers
-- Web search service implementations
+**Check:** API routes, HTTP clients, service layers
 
 ## 3. Frontend Performance
 
@@ -41,16 +35,12 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Missing lazy loading for images/components
 - Excessive DOM manipulation in loops
 - No debouncing/throttling on frequent events
-- Large Alpine.js data objects causing reactivity overhead
+- Large reactive data objects causing overhead
 - Missing code splitting or bundling
 - Synchronous operations blocking UI rendering
 - Unnecessary re-renders or watchers
 
-**Check files:**
-- `frontend/app/templates/`
-- `frontend/static/js/`
-- JavaScript event handlers
-- Alpine.js x-data and x-init directives
+**Check:** Templates, JavaScript files, event handlers
 
 ## 4. Backend Processing Performance
 
@@ -64,13 +54,9 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Heavy computation in request handlers
 - No caching of expensive operations
 
-**Check files:**
-- `backend/ingenious_extensions/services/chat_services/`
-- `functions/shared/blob_loader.py`
-- Agent workflow implementations
-- Token counting and truncation logic
+**Check:** Service classes, background jobs, data processing logic
 
-## 5. Memory & Resource Management
+## 5. Memory and Resource Management
 
 **Search for:**
 - Memory leaks (unclosed connections, unreleased resources)
@@ -81,13 +67,9 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Missing resource pooling
 - Large log statements in hot paths
 
-**Check files:**
-- Service classes with persistent state
-- Database connection handling
-- File I/O operations
-- Cache implementations
+**Check:** Service classes, connection handling, cache implementations
 
-## 6. Concurrency & Parallelization
+## 6. Concurrency and Parallelization
 
 **Search for:**
 - Sequential operations that could run in parallel
@@ -96,20 +78,16 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
 - Lock contention or deadlock risks
 - Missing use of concurrent.futures or asyncio
 - Synchronous code in async contexts
-- GIL-bound operations in Python
 
-**Check files:**
-- Multi-agent workflow orchestration
-- Batch processing operations
-- Azure Functions concurrent execution
+**Check:** Batch operations, workflow orchestration, concurrent handlers
 
 ## Analysis Approach
 
 1. **Prioritize hot paths:**
    - User-facing request handlers
-   - Azure Functions triggers (BlobCreatedTrigger, RegenerateTrigger)
-   - Multi-agent workflow execution
+   - Background job processing
    - Database query-heavy operations
+   - External API integrations
 
 2. **Measure before optimizing:**
    - Check for existing performance metrics/logging
@@ -127,4 +105,4 @@ Perform deep analysis to identify performance bottlenecks across the codebase:
    - Memory usage vs speed
    - Caching benefits vs stale data risks
 
-Focus on issues that would have the most significant impact on user experience and system scalability.
+Focus on issues with the most significant impact on user experience and system scalability.

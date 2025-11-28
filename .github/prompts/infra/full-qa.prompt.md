@@ -1,107 +1,88 @@
-Work on the `to-stable` branch.
+# Full Quality Assurance Pipeline
 
-## General Rules (apply throughout)
+Run comprehensive quality checks and validation across the entire codebase.
 
-- Always use `az cli` to check if resources already exist in the resource group `ingen-test` before provisioning.
-  - If the resource exists, retrieve keys/permissions.
-  - Only provision the cheapest viable resource in `ingen-test` if missing. Do not use resources from other resource groups. Only use `ingen-test`.
-- Always check that docs align with your actual setup experience.
-  - Update only if incomplete, inaccurate, or missing.
-- **You are allowed to debug Ingenious library code if blocked.**
-- Commit Ingenious code changes incrementally in small, focused commits.
-- Never commit `test_dir/` or `ingenious_extensions`. Make sure to create `ingenious_extensions` in `test_dir/` and not as part of the Ingenious codebase.
-- Note that you are allowed to change database/resource credentials to achieve your goals.
+**Do not stop until all checks pass.**
 
----
+## Step 1: Code Quality
 
-## Sequential Steps
+```bash
+# Python linting and formatting
+uv run pre-commit run --all-files
 
-### Step 0 — Bootstrap
+# Type checking
+uv run mypy . --exclude .venv
 
-1. Create `test_dir/` and `cd test_dir/`.
-2. Follow `README.md` fully to bring up the environment. BUT install ingenious from source (i.e. this codebase) instead of PyPI.
-3. Use `az` with resource group `ingen-test`.
-4. Before provisioning anything, check if resources exist and retrieve access. Provision only if missing.
-5. Do not commit `test_dir/`.
+# Security scanning
+uv run bandit -r . -x .venv,tests
+```
 
----
+## Step 2: Test Suite
 
-### Step 1 — Local Docs
+```bash
+# Run all tests with coverage
+uv run pytest --cov=. --cov-report=term-missing -v
 
-- Verify that `README.md` and `docs/` match the local setup experience.
-- Update with gotchas, fixes, and debug steps from `test_dir/` if needed.
-- Keep examples terse and copy/pasteable.
+# Run any slow/integration tests if present
+uv run pytest -m "slow or integration" -v 2>/dev/null || true
+```
 
----
+## Step 3: Dependency Audit
 
-### Step 2 — Authentication (Basic + JWT)
+```bash
+# Check for known vulnerabilities (if pip-audit installed)
+uv run pip-audit 2>/dev/null || true
 
-- Ensure Basic Auth and JWT Auth both work locally.
-- Add minimal code changes and concise configuration examples if needed.
-- Validate with `curl`.
-- Update `docs/auth.md` or `README.md` only if missing or inaccurate.
+# Verify lock file is up to date
+uv lock --check 2>/dev/null || true
+```
 
----
+## Step 4: Build Verification
 
-### Step 3 — Cosmos DB + Blob Integration
+If applicable, verify the project builds:
 
-Within `test_dir`, add and test:
+```bash
+# Python package build
+uv build 2>/dev/null || true
 
-1. Cosmos DB for chat history persistence
-2. Azure Blob for prompt storage
+# Docker build (if Dockerfile exists)
+if [ -f Dockerfile ]; then
+  docker build -t qa-test . --quiet
+fi
+```
 
-- Use `az cli` to check or provision.
-- Validate the bike-insights workflow with Cosmos DB + Blob enabled via `curl`.
-- Update `docs/guides/complete-azure-deployment.md` if needed.
-- Note that you are allowed to change database/resource credentials to achieve your goals. Do not use special characters in the UID or password for the db.
+## Step 5: Documentation Check
 
----
+- Verify README.md is accurate and up-to-date
+- Check that all public APIs are documented
+- Ensure CHANGELOG.md reflects recent changes (if exists)
 
-### Step 4 — Azure SQL Integration
+## Step 6: Git Hygiene
 
-- Validate Azure SQL integration within `test_dir`.
-- Use `az cli` to check or provision Azure SQL.
-- Retrieve keys/permissions if it exists.
-- Verify workflows with Azure SQL using `curl`.
-- Update `docs/guides/azure-sql-deployment.md` if needed.
+```bash
+# Check for uncommitted changes
+git status
 
----
+# Verify no secrets in codebase
+git secrets --scan 2>/dev/null || true
+```
 
-### Step 5 — Knowledge-Base Agent with Azure AI Search
+## Failure Handling
 
-- Validate that the knowledge-base-agent works with Azure AI Search.
-- Use `az cli` to check or provision Azure AI Search.
-- Retrieve keys/permissions if it exists.
-- Verify with queries against the agent.
-- Update `docs/guides/azure-ai-search-deployment.md` if needed.
+For each failure encountered:
+1. Identify the root cause
+2. Implement the fix
+3. Re-run the failing check
+4. Continue until all checks pass
 
----
+## Completion Criteria
 
-### Step 6 — Transition Local → Azure Docs
+All checks must pass:
+- [ ] Pre-commit hooks pass
+- [ ] Type checking passes
+- [ ] All tests pass
+- [ ] No security vulnerabilities
+- [ ] Build succeeds
+- [ ] No uncommitted changes
 
-- Check if `docs/guides/complete-azure-deployment.md` explains moving from local to Azure SQL + Blob.
-- If not, add/update with:
-  - Env var table
-  - `az cli` one-liners (with check-before-provision guidance)
-  - Minimal provisioning instructions
-  - `curl` verification snippets
-
----
-
-### Step 7 — Custom Workflow (with Auth)
-
-- Create a custom workflow in Ingenious.
-- Validate end-to-end execution with Basic + JWT Auth.
-- Update `docs/guides/custom-workflows.md` if needed.
-- Include config/code examples and `curl` commands.
-
----
-
-### Step 8 — Full API + Prompt Testing
-
-- Systematically test all "prompts/" API endpoints (i.e. routes containing `prompt/` or `prompts/` as part of the route).
-- For each `prompts/` endpoint, run a `curl` command.
-
----
-
-**DO NOT STOP UNTIL THIS FULL TASK IS COMPLETED.**
+**Continue debugging and fixing until everything passes.**
