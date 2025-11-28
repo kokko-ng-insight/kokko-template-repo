@@ -1,90 +1,33 @@
-# Package Management: uv
+# CLAUDE.md
 
-This project uses uv for Python package and environment management.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Common Commands
-- **Run a command in the project environment:**
-  `uv run <command>` (e.g., `uv run app.py` instead of `uv run python app.py`)
+# Important Note on Your Context Window
+Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Therefore, do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to memory before the context window refreshes. Always be as persistent and autonomous as possible and complete tasks fully, even if the end of your budget is approaching. Never artificially stop any task early regardless of the context remaining.
 
-- **Add a dependency:**
-  `uv add <package>` or `uv add <package> --dev` for dev dependencies
+## Repository Context
 
-- **Remove a dependency:**
-  `uv remove <package>` or `uv remove <package> --group dev` for dev dependencies
+**ADD REPOSITORY CONTEXT HERE**
 
-- **Sync environment with pyproject.toml and lockfile:**
-  `uv sync`
+## Communication Style
 
-- **List out packages in environment in a tree structure**
-  `uv tree`
+**CRITICAL**: When working with this codebase:
+- **NEVER use emojis** in any communication, code, comments, or documentation
+- **Always maintain a concise, professional tone** in all interactions
+- Provide direct, clear technical communication without unnecessary elaboration
+- Focus on facts and technical accuracy over conversational language
 
-## Note
+## Testing and Development Files
 
-- Do **not** use `pip` or `pip-tools` directly; use `uv` commands above.
+**CRITICAL**: All testing artifacts, temporary files, and development scripts must be placed in the `/tmp` folder to maintain repository cleanliness:
 
-# Python Type Hinting
+- Development scripts and experiments
+- Temporary output files
+- Test artifacts and logs
+- Mock data generators
 
-## Best Practices
-- **Always type hint function parameters and return values.**
-  ```python
-  def process_data(items: list[str]) -> dict[str, int]:
-      return {"count": len(items)}
-  ```
+This prevents clutter in the working directory and ensures consistent cleanup across development environments.
 
-- **Use modern union syntax** with `|` instead of `Union` (Python 3.10+).
-  ```python
-  # Good
-  def get_user(user_id: int | str) -> User | None:
-      pass
+## Package Management
 
-  # Avoid
-  from typing import Union, Optional
-  def get_user(user_id: Union[int, str]) -> Optional[User]:
-      pass
-  ```
-
-- **Use `from __future__ import annotations`** for forward references and cleaner code.
-
-# Flask Best Practices
-
-## Response Handling
-- **Return dictionaries directly** from Flask routes instead of using `jsonify()`. Flask automatically converts dictionaries to JSON responses.
-  ```python
-  # Good
-  return {"message": "success", "data": data}
-
-  # Avoid
-  return jsonify({"message": "success", "data": data})
-  ```
-
-## Error Handling
-- **Use try/abort pattern** instead of Flask's `_or_404` or similar convenience functions for better error control.
-  ```python
-  # Good
-  try:
-      user = User.query.filter_by(id=user_id).one()
-  except NoResultFound:
-      abort(404, description="User not found")
-
-  # Avoid
-  user = User.query.get_or_404(user_id)
-  ```
-
-  ## Static Files
-
-  - **Store static files** such as CSS, JavaScript, and images in the `static` directory.
-  - **Store HTML Jinja templates** in the `templates` directory.
-  - **For small snippets** of CSS or JavaScript, consider inlining them directly into your templates if it simplifies the project structure. However, for maintainability, lengthy JS code should always be kept separate.
-
-# Frontend Libraries
-## Bootstrap
-- Use Bootstrap for all styling and layout.
-- Prefer Bootstrap utility classes (e.g., `d-flex`, `mb-3`, `text-primary`) over custom CSS.
-- Write custom CSS only if Bootstrap utilities are insufficient.
-- Include Bootstrap via CDN in your base template.
-
-## Alpine.js
-- Use Alpine.js for client-side interactivity.
-- Prefer Alpine.js directives (`x-data`, `x-show`, `x-on:click`) over vanilla JS or jQuery.
-- Keep Alpine.js logic simple and declarative in HTML attributes.
-- Include Alpine.js via CDN in your base template.
+Uses **uv** for Python package and environment management. Python 3.13+ is required.
