@@ -1,0 +1,1 @@
+Reduce the amount of Any/any types for both Python and Javascript in this codebase
