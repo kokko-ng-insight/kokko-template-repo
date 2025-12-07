@@ -7,15 +7,6 @@ Use ESLint complexity rules to identify high-complexity functions and refactor t
 ```bash
 # Check cyclomatic complexity with ESLint
 npx eslint resources/js/ --ext .js,.ts,.vue --rule 'complexity: ["warn", 10]'
-
-# For more detailed analysis, use es6-plato
-npx es6-plato -r -d /tmp/plato-report resources/js/
-open /tmp/plato-report/index.html
-```
-
-Alternative using complexity-report:
-```bash
-npx cr resources/js/**/*.ts --format plain
 ```
 
 ## 2. Identify Hotspots
