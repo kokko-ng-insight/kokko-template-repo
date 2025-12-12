@@ -2,34 +2,74 @@
 
 ## Instructions
 
-1. **Security Check: Scan for secrets**
-    - **CRITICAL**: Before committing, scan all staged files for potential secrets:
+1. **Security Check: Scan for secrets using static analysis**
+    - **CRITICAL**: Before committing, run a static analysis tool to detect secrets:
+
+    **Option A: detect-secrets (recommended)**
+    ```bash
+    # Install if needed: pip install detect-secrets
+    # Scan staged files for secrets
+    git diff --cached --name-only | xargs detect-secrets scan --list-all-secrets
+    ```
+
+    **Option B: gitleaks**
+    ```bash
+    # Install if needed: brew install gitleaks (macOS) or download from GitHub
+    # Scan staged changes
+    gitleaks detect --staged --verbose
+    ```
+
+    **Option C: trufflehog**
+    ```bash
+    # Install if needed: brew install trufflehog (macOS)
+    # Scan staged changes
+    git diff --cached | trufflehog --json filesystem --staged
+    ```
+
+    - The tool will detect:
       - API keys, tokens, passwords
       - Private keys, certificates
       - Connection strings, database credentials
       - AWS/Azure/GCP credentials
-      - Environment files (.env, .env.local, etc.)
-      - Configuration files with sensitive data
-    - Use `git diff --cached` to review staged changes
-    - Check for patterns like:
-      - `API_KEY=`, `PASSWORD=`, `SECRET=`, `TOKEN=`
-      - Private key headers (BEGIN RSA PRIVATE KEY, etc.)
-      - Base64-encoded strings that might be credentials
+      - High-entropy strings that may be secrets
     - **If secrets are found**: Remove them immediately, use environment variables or secret management instead
     - **NEVER commit or push files containing secrets**
+    - For false positives, add to `.secrets.baseline` (detect-secrets) or `.gitleaksignore` (gitleaks)
 
 2. **Assess the scope of changes**
     - If there are extensive changes, break them into logical groups
     - Each commit should represent a cohesive set of related changes
     - Consider grouping by: feature, bug fix, refactoring, documentation, tests
 
-3. **Write a concise and descriptive git commit message**
-    - Summarize the changes made.
-    - Use the imperative mood (e.g., "Add feature", "Fix bug", "Update docs").
-    - Keep the first line under 72 characters.
+3. **Write a commit message using Conventional Commits format**
+    - Use the format: `<type>(<scope>): <description>`
+    - **Types** (required):
+      - `feat`: New feature or functionality
+      - `fix`: Bug fix
+      - `docs`: Documentation changes only
+      - `style`: Code style changes (formatting, whitespace)
+      - `refactor`: Code refactoring without behavior change
+      - `perf`: Performance improvements
+      - `test`: Adding or modifying tests
+      - `chore`: Build process, dependencies, or tooling changes
+      - `security`: Security-related changes
+      - `ci`: CI/CD configuration changes
+    - **Scope** (optional): Component or module affected (e.g., `auth`, `api`, `db`)
+    - **Description**: Use imperative mood, keep under 50 characters
+    - Keep the full first line under 72 characters
     - **NEVER include emojis in commit messages**
     - **Maintain a concise, professional tone**
     - **DO NOT add attribution footers** (e.g., no "Generated with Claude Code" or "Co-Authored-By: Claude")
+
+    **Examples:**
+    ```
+    feat(auth): add JWT token refresh endpoint
+    fix(db): resolve connection pool exhaustion
+    refactor(api): simplify request validation logic
+    docs: update API endpoint documentation
+    chore(deps): upgrade FastAPI to 0.110.0
+    security(auth): sanitize user input in login
+    ```
 
 4. **Commit your changes**
     - For small changes:
@@ -54,13 +94,13 @@
 ### Single Commit (Small Changes)
 1. **Commit message:**
     ```
-    Add user authentication to login endpoint
+    feat(auth): add user authentication to login endpoint
     ```
 
 2. **Commands:**
     ```sh
     git add .
-    git commit -m "Add user authentication to login endpoint"
+    git commit -m "feat(auth): add user authentication to login endpoint"
     git push
     ```
 
@@ -69,16 +109,30 @@
     ```sh
     # Commit core functionality first
     git add src/auth/
-    git commit -m "Add authentication service and middleware"
+    git commit -m "feat(auth): add authentication service and middleware"
 
     # Commit tests separately
     git add tests/auth/
-    git commit -m "Add authentication tests"
+    git commit -m "test(auth): add authentication unit tests"
 
     # Commit documentation
     git add docs/auth.md
-    git commit -m "Add authentication documentation"
+    git commit -m "docs(auth): add authentication documentation"
 
     # Push all commits
     git push
     ```
+
+### Bug Fix Example
+```sh
+git add .
+git commit -m "fix(api): resolve null pointer in request handler"
+git push
+```
+
+### Refactoring Example
+```sh
+git add .
+git commit -m "refactor(db): extract query builder into separate module"
+git push
+```
